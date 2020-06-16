@@ -1,0 +1,26 @@
+data(Groceries)
+transactions <-  Groceries
+summary(transactions)  # transactions as itemMatrix in sparse format
+nrow(transactions)
+itemFrequencyPlot(transactions, support=0.1, cex.names=0.8)
+itemFrequencyPlot(transactions, support=0.05, cex.names=0.8)
+itemFrequencyPlot(transactions, topN=20)
+freq.itemsets <- eclat(transactions, parameter=list(supp=0.075, maxlen=15))
+inspect(freq.itemsets)
+rules <- apriori(Groceries, parameter = list(support = 0.009,
+                                             confidence = 0.25, minlen = 2))
+summary(rules)
+inspect(head(sort(rules, by ="lift"),5)) #to inspect top 5 rules
+inspect(sort(sort(rules, by ="support"),by ="confidence")[1:5])
+plot(rules, measure=c("support", "confidence"), shading="lift", interactive=FALSE)
+milk.rules <- sort(subset(rules, subset = rhs %in% "whole milk"), by = "confidence")
+summary(milk.rules)
+inspect(milk.rules)
+is.significant(milk.rules, transactions) 
+is.maximal(milk.rules)
+is.redundant(milk.rules) 
+plot(milk.rules,  measure=c("support", "confidence"), shading="lift")
+coke.rules <- sort(subset(rules, subset = rhs %in% "soda"), by = "confidence")
+summary(coke.rules)
+inspect(coke.rules)
+is.significant(coke.rules, transactions) 
