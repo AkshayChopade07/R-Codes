@@ -5,7 +5,7 @@ claimants <- na.omit(claimants) # Omitting NA values from the Data
 dim(claimants)
 
 colnames(claimants)
-claimants <- claimants[,-1] # Removing the first column which is is an Index
+claimants <- claimants[,-1] # Removing the first column which is  an Index
 
 # Preparing a linear regression 
 mod_lm <- lm(ATTORNEY~.,data=claimants)
