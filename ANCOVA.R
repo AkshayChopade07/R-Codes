@@ -1,6 +1,5 @@
 input <- mtcars[,c("am","mpg","hp")]
 print(head(input))
-#Live Demo
 # Get the dataset.
 input <- mtcars
 
@@ -13,7 +12,6 @@ input <- mtcars
 # Create the regression model.
 result <- aov(mpg~hp+am,data = input)
 print(summary(result))
-
 # Get the dataset.
 input <- mtcars
 
